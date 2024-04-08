@@ -1,7 +1,7 @@
 const express = require('express');       
 const mysql = require('mysql12');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 const db = mysql.createConnection({
@@ -92,7 +92,7 @@ app.get('/api/role', (req, res) => {
         });
     });
 }); 
-//Read all employees
+//View all employees
 app.get('/api/employee', (req, res) => {
     const sql = `SELECT * FROM employee`;
     db.query(sql, (err, rows) => {
@@ -106,3 +106,65 @@ app.get('/api/employee', (req, res) => {
         });
     });
 });
+
+//Prompt to add a new employee
+inquirer.prompt([       
+    {
+        type: 'input',
+        name: 'first_name',
+        message: "What is the employee's first name?"
+    },
+    {
+        type: 'input',
+        name: 'last_name',
+        message: "What is the employee's last name?"
+    },
+    {
+        type: 'input',
+        name: 'title',
+        message: "What is the employee's title?"
+    },
+    {
+        type: 'input',
+        name: 'department_id', 
+        message: "What is the department id in which employee will be in?"
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: "What is the employee's salary?"
+    }
+])
+.then((data) => {
+    const sql = `INSERT INTO employee (first_name, last_name, title, department_id, salary)
+                 VALUES (?, ?, ?, ?, ?)`;
+    const params = [data.first_name, data.last_name, data.title, data.department_id, data.salary];
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('Employee added!');
+    });
+});
+
+//Prompt to initialize
+function init() {
+    inquirer.prompt({
+        type: 'list',
+        name: 'action',
+        message: 'What would you like to do?',
+        choices: [
+            'Add a department',
+            'Add a role',
+            'Add an employee',
+            'View all departments',
+            'View all roles',
+            'View all employees',
+            'Update an employee role'
+        ]
+    })
+};
+
+//Start the server
+init(); 
