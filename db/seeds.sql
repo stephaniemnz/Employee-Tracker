@@ -13,8 +13,8 @@ INSERT INTO roles (title, salary, department_id) VALUES
     ('Lawyer', 100000, 5);   
 
 INSERT INTO employees (employee_id, first_name, last_name, title, department_id, salary,) VALUES
-    (10, 'John', 'Doe', 'Software Engineer', 1, 80000),
-    (20, 'Jane', 'Smith', 'Marketing Manager', 2, 90000),
-    (30, 'John', 'Smith', 'Sales Manager', 3, 85000),
-    (40, 'Jane', 'Doe', 'Financial Analyst', 4, 75000),
-    (50, 'John', 'Doe', 'Lawyer', 5, 100000);
+    (10, 'Stephanie', 'Ramos', 'Software Engineer', 1, 80000),
+    (20, 'Whiskey', 'Ramos', 'Marketing Manager', 2, 90000),
+    (30, 'Gin', 'Muniz', 'Sales Manager', 3, 85000),
+    (40, 'Kahlua', 'Demoss', 'Financial Analyst', 4, 75000),
+    (50, 'Rooster', 'Melendez', 'Lawyer', 5, 100000);
